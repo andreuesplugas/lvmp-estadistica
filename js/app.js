@@ -84,6 +84,7 @@ function loadCSV() {
     header: true,
     skipEmptyLines: true,
     complete: function(results) {
+      console.log(results.data);
 
       const data = results.data;
 
