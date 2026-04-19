@@ -1,7 +1,9 @@
 // 🔴 PON AQUÍ TU URL
-const DATA_URL = "https://script.google.com/macros/s/XXXXX/exec";
+//const DATA_URL = "https://script.google.com/macros/s/XXXXX/exec";
 // o CSV:
 // const DATA_URL = "https://docs.google.com/spreadsheets/d/.../pub?output=csv";
+
+const DATA_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQVaP1-ziLbI2dQbfInEhOLhbUmGvRlrHu6mM9USQgftrrKdbPlOMB49AD27g3y4IHfC4xjGmmInXA6/pub?output=csv";
 
 // ---------- Helpers ----------
 
