@@ -3,6 +3,7 @@
 // o CSV:
 // const DATA_URL = "https://docs.google.com/spreadsheets/d/.../pub?output=csv";
 
+// 🔴 PON AQUÍ TU URL CSV
 const DATA_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQVaP1-ziLbI2dQbfInEhOLhbUmGvRlrHu6mM9USQgftrrKdbPlOMB49AD27g3y4IHfC4xjGmmInXA6/pub?output=csv";
 
 // ---------- Helpers ----------
@@ -18,15 +19,15 @@ function getYoutubeEmbed(url) {
 
 // detectar imagen
 function isImage(url) {
-  return url.match(/\.(jpeg|jpg|png|gif|webp)$/i);
+  return typeof url === "string" && url.match(/\.(jpeg|jpg|png|gif|webp)$/i);
 }
 
 // detectar número
 function isNumber(value) {
-  return !isNaN(value) && value !== null && value !== "";
+  return value !== null && value !== "" && !isNaN(value);
 }
 
-// detectar fecha simple
+// detectar fecha
 function isDate(value) {
   return !isNaN(Date.parse(value));
 }
@@ -39,7 +40,7 @@ function cellFormatter(cell) {
 
   if (typeof value === "string") {
 
-    // YouTube
+    // YouTube embed
     const yt = getYoutubeEmbed(value);
     if (yt) {
       return `<iframe width="150" height="90" src="${yt}" allowfullscreen></iframe>`;
@@ -59,53 +60,60 @@ function cellFormatter(cell) {
   return value;
 }
 
-// ---------- Crear columnas dinámicamente ----------
+// ---------- Columnas dinámicas ----------
 function generateColumns(data) {
   const keys = Object.keys(data[0]);
 
-  return keys.map(k => {
-    return {
-      title: k,
-      field: k,
-      headerFilter: "input",
-      formatter: cellFormatter,
-      sorter: function(a, b) {
-        if (isNumber(a) && isNumber(b)) return a - b;
-        if (isDate(a) && isDate(b)) return new Date(a) - new Date(b);
-        return String(a).localeCompare(String(b));
-      }
-    };
-  });
+  return keys.map(k => ({
+    title: k,
+    field: k,
+    headerFilter: "input",
+    formatter: cellFormatter,
+    sorter: function(a, b) {
+      if (isNumber(a) && isNumber(b)) return Number(a) - Number(b);
+      if (isDate(a) && isDate(b)) return new Date(a) - new Date(b);
+      return String(a).localeCompare(String(b));
+    }
+  }));
 }
 
-// ---------- Cargar datos ----------
-async function loadData() {
-  const response = await fetch(DATA_URL);
-  let data = await response.json();
+// ---------- Cargar CSV ----------
+function loadCSV() {
+  Papa.parse(DATA_URL, {
+    download: true,
+    header: true,
+    skipEmptyLines: true,
+    complete: function(results) {
 
-  return data;
+      const data = results.data;
+
+      if (!data || data.length === 0) {
+        console.error("No hay datos");
+        return;
+      }
+
+      const table = new Tabulator("#tabla", {
+        data: data,
+        layout: "fitColumns",
+        pagination: true,
+        paginationSize: 10,
+        columns: generateColumns(data),
+      });
+
+      // filtro global
+      document.getElementById("filtro").addEventListener("keyup", function() {
+        const value = this.value.toLowerCase();
+
+        table.setFilter(function(rowData) {
+          return Object.values(rowData).some(v =>
+            String(v).toLowerCase().includes(value)
+          );
+        });
+      });
+
+    }
+  });
 }
 
 // ---------- Init ----------
-loadData().then(data => {
-
-  const table = new Tabulator("#tabla", {
-    data: data,
-    layout: "fitColumns",
-    pagination: true,
-    paginationSize: 10,
-    columns: generateColumns(data),
-  });
-
-  // filtro global
-  document.getElementById("filtro").addEventListener("keyup", function() {
-    const value = this.value.toLowerCase();
-
-    table.setFilter(function(data) {
-      return Object.values(data).some(v =>
-        String(v).toLowerCase().includes(value)
-      );
-    });
-  });
-
-});
+document.addEventListener("DOMContentLoaded", loadCSV);
