@@ -1,0 +1,23 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+
+h1 {
+  margin-bottom: 10px;
+}
+
+#filtro {
+  margin-bottom: 10px;
+  padding: 6px;
+  width: 250px;
+}
+
+img {
+  border-radius: 4px;
+}
+
+iframe {
+  border: none;
+  border-radius: 4px;
+}
