@@ -176,9 +176,11 @@ function processData(results) {
 
   const table = new Tabulator("#tabla", {
     data: data,
+    height:"1000px",
+    tooltipsHeader: false,
     layout: "fitColumns",
     pagination: true,
-    paginationSize: 10,
+    paginationSize: 15,
     columns: generateColumns(data),
     initialSort: [{column: "data", dir: "desc"}],
   });
