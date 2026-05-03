@@ -29,34 +29,39 @@ iframe {
   border-radius: 4px;
 }
 
-/*Tema del elemento Tabulator*/
+/*Tema del elemento Tabulator
 #tabla{
   background-color:#ccc;
   border: 1px solid #333;
   border-radius: 10px;
 }
-
-/*Tema del encabezado*/
+*/
 #tabla .tabulator-header {
-  background-color: #333 !important;
-  /*color:#fff;*/
+  border-color: blue;
+  border-width: 3px;
+}
+/*Tema del encabezado 
+#tabla .tabulator-header {
+  background-color: #333;
+  color:#fff;
   border-color: green;
   border-width: 5px;
 }
 
-/*Permitir que los nombres de los encabezados de columna se ajusten a las líneas*/
+/*Permitir que los nombres de los encabezados de columna se ajusten a las líneas
 #tabla .tabulator-header .tabulator-col,
 #tabla .tabulator-header∫ .tabulator-col-row-handle {
   white-space: normal;
 }
 
-/*Colorea las filas de la tabla*/
+/*Colorea las filas de la tabla
 #tabla .tabulator-tableholder .tabulator-table .tabulator-row{
   color:#fff;
   background-color: #666;
 }
 
-/*Colorea las filas pares*/
+/*Colorea las filas pares
 #tabla .tabulator-tableholder .tabulator-table .tabulator-row:nth-child(even) {
   background-color: #444;
 }
+*/
