@@ -97,24 +97,37 @@ function cellFormatter(cell) {
 // ---------- Columnas dinámicas ----------
 function generateColumns(data) {
   let keys = Object.keys(data[0]).filter(k => k !== "id" && k !== "etapa_inici" && k !== "etapa_fi");
-  
+  /*
   // Poner "dia" primero
   if (keys.includes("dia")) {
     keys = ["dia", ...keys.filter(k => k !== "dia")];
   }
-  
+  */
   let columns = keys.map(k => {
     let column = {
       title: k,
       field: k,
       headerFilter: "input",
-      formatter: cellFormatter,
-      sorter: function(a, b) {
-        if (isNumber(a) && isNumber(b)) return Number(a) - Number(b);
-        return String(a).localeCompare(String(b));
-      }
+      //formatter: cellFormatter,
+      //sorter: function(a, b) {
+      //  if (isNumber(a) && isNumber(b)) return Number(a) - Number(b);
+      //  return String(a).localeCompare(String(b));
+      //}
     };
     
+    if (k === "dia") {
+      column.title = "Día";
+      column.formatter = "textarea";
+      column.width = 100; // Ajustar ancho para que se vean todos los valores
+    }
+    if (k === "data") {
+      column.title = "Data";
+      //column.formatter = "date";
+      column.sorter = "date";
+      column.sorterParams = { format: "dd/MM/yyyy" };
+      column.width = 100; // Ajustar ancho para que se vean todos los valores
+    }
+    /*
     if (k === "data") {
       column.sorter = function(a, b) {
         const aDate = parseDateValue(a);
@@ -126,15 +139,21 @@ function generateColumns(data) {
         return String(a).localeCompare(String(b));
       };
     }
-    
+    */
     if (k === "etapa") {
       column.title = "Etapa";
+      column.formatter = "textarea";
+      column.width = 100; // Ajustar ancho para que se vean todos los valores
+    }
+    if (k === "trajecte") {
+      column.title = "Trajecte";
+      column.formatter = "textarea";
       column.width = 200; // Ajustar ancho para que se vean todos los valores
     }
     
     return column;
   });
-  
+  /*
   const etapaVirtual = {
     title: "Etapa",
     field: "etapa_virtual",
@@ -159,7 +178,7 @@ function generateColumns(data) {
   } else {
     columns.push(etapaVirtual);
   }
-  
+  */
   return columns;
 }
 
@@ -182,7 +201,7 @@ function processData(results) {
     pagination: true,
     paginationSize: 15,
     columns: generateColumns(data),
-    initialSort: [{column: "data", dir: "desc"}],
+    //initialSort: [{column: "data", dir: "desc"}],
   });
 
   // filtro global
