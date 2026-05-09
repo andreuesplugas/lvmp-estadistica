@@ -145,7 +145,7 @@ function generateColumns(data) {
     if (k === "etapa") {
       column.title = "Etapa";
       column.formatter = "textarea";
-      column.width = 100; // Ajustar ancho para que se vean todos los valores
+      column.width = 200; // Ajustar ancho para que se vean todos los valores
     }
     if (k === "trajecte") {
       column.title = "Trajecte";
