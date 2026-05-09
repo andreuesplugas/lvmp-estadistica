@@ -110,7 +110,7 @@ function generateColumns(data) {
       field: k,
       responsive: _responsive++,
       //headerFilter: "input",
-      formatter: cellFormatter,
+      //formatter: cellFormatter,
       //sorter: function(a, b) {
       //  if (isNumber(a) && isNumber(b)) return Number(a) - Number(b);
       //  return String(a).localeCompare(String(b));
@@ -153,11 +153,14 @@ function generateColumns(data) {
       column.width = 200; // Ajustar ancho para que se vean todos los valores
     }
     if (k === "estadistica") {
-      column.title = "Etadística";
+      column.title = "Estadística";
       column.formatter = "textarea";
       //column.width = 200; // Ajustar ancho para que se vean todos los valores
     }
-    
+    if (k === "link_youtube") {
+      column.formatter = cellFormatter;
+
+    }
     return column;
   });
   /*
