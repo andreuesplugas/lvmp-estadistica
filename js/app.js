@@ -152,6 +152,11 @@ function generateColumns(data) {
       column.formatter = "textarea";
       column.width = 200; // Ajustar ancho para que se vean todos los valores
     }
+    if (k === "estadistica") {
+      column.title = "Etadística";
+      column.formatter = "textarea";
+      //column.width = 200; // Ajustar ancho para que se vean todos los valores
+    }
     
     return column;
   });
