@@ -65,3 +65,12 @@ iframe {
   background-color: #444;
 }
 */
+.tabulator .tabulator-cell {
+  padding: 12px;
+  font-size: 16px;
+}
+
+.tabulator .tabulator-header .tabulator-col {
+  padding: 12px;
+  font-size: 16px;
+}

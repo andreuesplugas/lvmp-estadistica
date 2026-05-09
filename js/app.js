@@ -103,11 +103,13 @@ function generateColumns(data) {
     keys = ["dia", ...keys.filter(k => k !== "dia")];
   }
   */
+  var _responsive = 0;
   let columns = keys.map(k => {
     let column = {
       title: k,
       field: k,
-      headerFilter: "input",
+      responsive: _responsive++,
+      //headerFilter: "input",
       //formatter: cellFormatter,
       //sorter: function(a, b) {
       //  if (isNumber(a) && isNumber(b)) return Number(a) - Number(b);
@@ -193,14 +195,19 @@ function processData(results) {
     return;
   }
 
+  const isMobile = true; //tabletAndMobileCheck();
+
   const table = new Tabulator("#tabla", {
     data: data,
     height:"1000px",
     tooltipsHeader: false,
-    layout: "fitColumns",
+    layout: isMobile ? "fitDataStretch" : "fitColumns",
+    responsiveLayout: isMobile ? "collapse" : false,
+    height: isMobile ? "70vh" : null,
     pagination: true,
     paginationSize: 15,
     columns: generateColumns(data),
+
     //initialSort: [{column: "data", dir: "desc"}],
   });
 
