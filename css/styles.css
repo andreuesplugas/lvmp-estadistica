@@ -1,6 +1,7 @@
 body {
   background-color: black;
   font-family: Arial, sans-serif;
+  font-size: 20px;
   margin: 20px;
 }
 
@@ -10,8 +11,16 @@ h1 {
   color: white;
 }
 
+h2 {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin-bottom: 10px;
+  color: white;
+  font-size: 16px;
+}
+
 #filtro {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 20px;
   margin-bottom: 10px;
   padding: 6px;
   width: 250px;
@@ -65,12 +74,15 @@ iframe {
   background-color: #444;
 }
 */
+.tabulator {
+  font-size: 26px;
+}
 .tabulator .tabulator-cell {
   padding: 12px;
-  font-size: 16px;
+/*  font-size: 26px;*/
 }
 
 .tabulator .tabulator-header .tabulator-col {
   padding: 12px;
-  font-size: 16px;
+/*  font-size: 26px;*/
 }
