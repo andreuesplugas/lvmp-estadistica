@@ -196,7 +196,7 @@ function generateColumns(data) {
   const youtube = {
     title: "YouTube",
     field: "youtube_virtual",
-    headerSort = false,
+    headerSort : false,
     mutator: function(value, data) {
       return (data.text_youtube || "") + "#" + 
         (data.portada_youtube || "") + "#" +
