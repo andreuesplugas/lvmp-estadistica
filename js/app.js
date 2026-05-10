@@ -193,7 +193,7 @@ function generateColumns(data) {
     }
     return column;
   });
-  /*
+  
   const youtube = {
     title: "YouTube",
     field: "youtube_virtual",
@@ -206,8 +206,8 @@ function generateColumns(data) {
     formatter: cellYoutubeFormatter,
     //width: 200
   }
-  */
-  //columns.push(youtube);
+  
+  columns.push(youtube);
   /*
   const etapaVirtual = {
     title: "Etapa",
