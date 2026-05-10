@@ -75,10 +75,10 @@ iframe {
 }
 */
 .tabulator {
-  font-size: 20px;
+  font-size: 12px;
 }
 .tabulator .tabulator-cell {
-  padding: 12px;
+  padding: 12px; 
 /*  font-size: 26px;*/
 }
 
@@ -86,3 +86,12 @@ iframe {
   padding: 12px;
 /*  font-size: 26px;*/
 }
+/*
+.tabulator-progress-bar .tabulator-progress {
+  height: 12px;
+  color: aqua;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  border-radius: 6px;
+}
+*/
