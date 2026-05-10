@@ -94,6 +94,25 @@ function cellFormatter(cell) {
   return value;
 }
 
+function cellYoutubeFormatter(cell) {
+  const value = cell.getValue();
+  if (!value) return "";
+  
+  const parts = value.split("#");
+  const text = parts[0] || "";
+  const portada = parts[1] || "";
+  const link = parts[2] || "";
+
+  if (link.startsWith("http")) {
+    const yt = getYoutubeEmbed(link);
+    if (yt) {
+      return `<a href="${link}" target="_blank">${text}<br><img src="${portada}" width="80"></a>`;
+    }
+    return `<a href="${link}" target="_blank">${text}</a>`;
+  }
+  return text;
+}
+
 // ---------- Columnas dinámicas ----------
 function generateColumns(data) {
   let keys = Object.keys(data[0]).filter(k => k !== "id" && k !== "etapa_inici" && k !== "etapa_fi");
@@ -152,17 +171,39 @@ function generateColumns(data) {
       column.formatter = "textarea";
       column.width = 200; // Ajustar ancho para que se vean todos los valores
     }
-    if (k === "estadistica") {
-      column.title = "Estadística";
+    if (k === "altres") {
+      column.title = "Altres";
       column.formatter = "textarea";
       //column.width = 200; // Ajustar ancho para que se vean todos los valores
     }
+    if (k === "distancia") {
+      column.title = "Distància";
+      column.formatter = "progress";
+      column.width = 80; // Ajustar ancho para que se vean todos los valores
+    }
+    if (k === "text_youtube") {
+     column.visible = false;
+    }
     if (k === "link_youtube") {
-      column.formatter = cellFormatter;
-
+     column.visible = false;
+    }
+    if (k === "portada_youtube") {
+     column.visible = false;
     }
     return column;
   });
+  const youtube = {
+    title: "YouTube",
+    field: "youtube_virtual",
+    mutator: function(value, data) {
+      return (data.text_youtube || "") + "#" + 
+        (data.portada_youtube || "") + "#" +
+        (data.link_youtube || "#") ;
+    },
+    formatter: cellYoutubeFormatter,
+    //width: 200
+  }
+  columns.push(youtube);
   /*
   const etapaVirtual = {
     title: "Etapa",
