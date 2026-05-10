@@ -106,7 +106,7 @@ function cellYoutubeFormatter(cell) {
   if (link.startsWith("http")) {
     const yt = getYoutubeEmbed(link);
     if (yt) {
-      return `<a href="${link}" target="_blank">${text}<br><img src="${portada}" width="80"></a>`;
+      return `<a href="${link}" target="_blank">${text}<br><img src="${portada}" width="150"></a>`;
     }
     return `<a href="${link}" target="_blank">${text}</a>`;
   }
@@ -179,7 +179,7 @@ function generateColumns(data) {
     if (k === "distancia") {
       column.title = "Distància";
       column.formatter = "progress";
-      column.width = 80; // Ajustar ancho para que se vean todos los valores
+      column.width = 150; // Ajustar ancho para que se vean todos los valores
     }
     if (k === "text_youtube") {
      column.visible = false;
