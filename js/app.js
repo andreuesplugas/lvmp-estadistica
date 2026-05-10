@@ -260,8 +260,7 @@ function processData(results) {
     pagination: true,
     paginationSize: 15,
     columns: generateColumns(data),
-
-    //initialSort: [{column: "data", dir: "desc"}],
+    initialSort: [{column: "dia", dir: "desc"}],
   });
 
   // filtro global
