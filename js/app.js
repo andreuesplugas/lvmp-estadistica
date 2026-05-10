@@ -174,6 +174,7 @@ function generateColumns(data) {
     if (k === "altres") {
       column.title = "Altres";
       column.formatter = "textarea";
+      column.headerSort = false;
       //column.width = 200; // Ajustar ancho para que se vean todos los valores
     }
     if (k === "distancia") {
@@ -195,6 +196,7 @@ function generateColumns(data) {
   const youtube = {
     title: "YouTube",
     field: "youtube_virtual",
+    headerSort = false,
     mutator: function(value, data) {
       return (data.text_youtube || "") + "#" + 
         (data.portada_youtube || "") + "#" +
