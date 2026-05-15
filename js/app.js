@@ -120,6 +120,7 @@ function cellDistanciaFormatter(cell) {
   const percent = (value / max) * 100;
   let ticks = "";
 
+  if (value == 0) return '';
   // marcas cada 5 km
   for(let i = 5; i < max; i += 5){
     const left = (i / max) * 100;
