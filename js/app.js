@@ -113,6 +113,38 @@ function cellYoutubeFormatter(cell) {
   return text;
 }
 
+function cellDistanciaFormatter(cell) {
+
+  const value = cell.getValue() || 0;
+  const max = 60;
+  const percent = (value / max) * 100;
+  let ticks = "";
+
+  // marcas cada 5 km
+  for(let i = 5; i < max; i += 5){
+    const left = (i / max) * 100;
+    const major = i % 10 === 0;
+    ticks += `
+      <div class="km-tick ${major ? 'major' : 'minor'}"
+        style="left:${left}%">
+      </div>
+    `;
+  }
+
+  return `
+    <div class="distance-cell">
+      <div class="distance-text">
+        ${value} km
+      </div>
+      <div class="distance-bar-container">
+        <div class="distance-bar"
+          style="width:${percent}%">
+        </div>
+        ${ticks}
+      </div>
+    </div>
+  `;
+}
 // ---------- Columnas dinámicas ----------
 function generateColumns(data) {
   let keys = Object.keys(data[0]).filter(k => k !== "id" && k !== "etapa_inici" && k !== "etapa_fi");
@@ -179,7 +211,9 @@ function generateColumns(data) {
     }
     if (k === "distancia") {
       column.title = "Distància";
-      column.formatter = "progress";
+      column.sorter = "number";
+      column.hozAlign = "left";
+      column.formatter = cellDistanciaFormatter;
       column.width = 150; // Ajustar ancho para que se vean todos los valores
     }
     if (k === "text_youtube") {
