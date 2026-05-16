@@ -106,7 +106,7 @@ function cellYoutubeFormatter(cell) {
   if (link.startsWith("http")) {
     const yt = getYoutubeEmbed(link);
     if (yt) {
-      return `<a href="${link}" target="_blank">${text}<br><img src="${portada}" width="220"></a>`;
+      return `<a href="${link}" target="_blank">${text}<br><img src="${portada}" width="260"></a>`;
     }
     return `<a href="${link}" target="_blank">${text}</a>`;
   }
