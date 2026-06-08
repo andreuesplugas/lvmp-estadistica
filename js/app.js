@@ -293,7 +293,7 @@ function processData(results) {
     responsiveLayout: isMobile ? "collapse" : false,
     height: isMobile ? "70vh" : null,
     pagination: true,
-    paginationSize: 15,
+    paginationSize: 1500,
     columns: generateColumns(data),
     initialSort: [{column: "dia", dir: "desc"}],
   });
